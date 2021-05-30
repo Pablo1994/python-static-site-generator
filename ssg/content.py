@@ -17,3 +17,14 @@ class Content(Mapping):
         self.data = metadata
         self.data["content"] = content
 
+    @property
+    def body(self):
+        return self.data["content"]
+
+    @property
+    def type(self):
+        return self.data["type"] if self.data["type"] else None
+
+    @type.setter
+    def type(self, value):
+        self.data["type"] = value
