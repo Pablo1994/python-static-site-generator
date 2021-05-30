@@ -4,14 +4,14 @@ from collections.abc import Mapping
 
 
 class Content(Mapping):
-    __delimeter = "^(?:-|\+){3}\s*$"
+    __delimeter = r"^(?:-|\+){3}\s*$"
     __regex = re.compile(__delimeter, re.MULTILINE)
 
     @classmethod
     def load(cls, string):
         _, fm, content = cls.__regex.split(string, 2)
         load(fm, Loader=FullLoader)
-        return cls(self.metadata, content)
+        return cls(cls.metadata, content)
 
     def __init__(self, metadata, content):
         self.data = metadata
