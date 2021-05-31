@@ -1,6 +1,11 @@
 from typing import List
 from pathlib import Path
+from docutils.core import publish_parts
+from markdown import markdown
+from ssg.content import Content
+
 import shutil
+import sys
 
 class Parser:
     extensions: List[str] = []
@@ -29,3 +34,10 @@ class ResourceParser(Parser):
 
     def parse(self, path: Path, source: Path, dest: Path):
         self.copy(path, source, dest)
+
+
+class MarkdownParser(Parser):
+    extensions = [".md", ".markdown"]
+
+    def parse(self, path: Path, source: Path, dest: Path):
+        content = Content.load(self.read(path))
